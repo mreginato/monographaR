@@ -1,0 +1,679 @@
+---
+title: "A quick guide to monographaR"
+author: "Marcelo Reginato"
+#date: "September 1, 2015"
+#output: rmarkdown::pdf_document
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{A quick guide to monographaR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Taxonomic monographs are important source of biological information. The production of such works is usually very time-consuming. Nonetheless, a good chunk of the taxonomist's time is expended generating the strictly formatted reports of the monograph. This R package was designed to facilitate the production of some standard components of monographs, such as: list of collectors, examined specimens, phenology graphs, maps and taxonomic descriptions. The package uses tables readable by R to perform the tasks (such as .csv, .txt, .tab). Those can be exported from Excel or other spreadsheet program. 
+
+
+
+## Installing monographaR
+
+To use monographaR you need to have [R installed](https://cran.r-project.org/), and optionally [Rstudio](https://www.rstudio.com/products/rstudio/download/) (recommended). After R and Rstudio are installed, you need to install monographaR. Open Rstudio and go to "Tools" $\rightarrow$ "Install Packages"; and install the package from the CRAN repository. Alternatively, you can type the following command in the terminal:
+
+```{r, eval=FALSE}
+install.packages("monographaR", dependencies=T)
+```
+
+
+## Using monographaR
+
+Using monographaR is very straightforward. In general, you need to run one command to import your data (a basic function of R such as read.csv, read.table, read.delim, etc...) and a second command to perform a task (a monographaR function). In the end of this tutorial there is a script model to run monographaR. To use it, open Rstudio,  go to "File" $\rightarrow$ "New File...R script", and create a new script file. Copy the lines in the script model of this tutorial and paste into the new script file you just created. You can save the script for future use.  
+To run a command in R you have two options: select one or more lines in the script and click in "run"; or type or paste the command in the "Console" window and hit enter. When running anything in R, the first thing to do is to set your working directory (i.e., the directory where the input tables are located and the directory where the outputs will be exported). To set your working directory in Rstudio go to "Session" $\rightarrow$ "Set Working Directory" $\rightarrow$ "Choose Directory...". Alternatively, you can type the following command:
+
+```{r, eval=FALSE}
+setwd("C:/My_working_directory")
+```
+
+
+Next, you need to load the required packages to perform your tasks. In our case, this is done with the command "library(monographaR)". Then you are ready to run the functions. 
+
+
+```{r, message=FALSE, warning=FALSE}
+library(monographaR)
+```
+
+monographaR comes with examples of input tables. We will be using these tables throughout this tutorial. To load and visualize the tables in R type: 
+
+```{r, eval=FALSE}
+data("monographaR_examples")
+head(monographaR_examples$collectorList)
+head(monographaR_examples$examinedSpecimens)
+head(monographaR_examples$phenoHist)
+head(monographaR_examples$tableToDescription)
+head(monographaR_examples$map_data)
+head(monographaR_examples$taxonomic_headings)
+head(monographaR_examples$mapPhenology)
+```
+
+Alternatively, you can export the model tables for visualization in a spreadsheet program. You can type the following commands to export the models:
+
+```{r, eval=FALSE, tidy=FALSE}
+data("monographaR_examples")
+write.csv(monographaR_examples$collectorList, file="collector_list_model.csv", row.names=F)
+write.csv(monographaR_examples$examinedSpecimens, file="examined_specimens_model.csv",
+  row.names=F)
+write.csv(monographaR_examples$phenoHist, file="phenology_model.csv", row.names=F)
+write.csv(monographaR_examples$tableToDescription, file="table_to_description_model.csv", 
+  row.names=F)
+write.csv(monographaR_examples$map_data, file="map_functions_model.csv", row.names=F)
+write.csv(monographaR_examples$taxonomic_headings, file="headings_model.csv", row.names=F)
+write.csv(monographaR_examples$mapPhenology file="mapPhenology_model.csv", row.names=F)
+```
+
+*The tables will be saved in your working directory.*
+
+## Functions
+
+### collectorList
+
+This function will generate a txt file with a collector list for all species in data. It requires a data.frame with five columns, ordered as species, collector name, collector number, herbarium acronym and herbarium number. Herbarium columns are only used if some collector number is missing (NA). Thus, if there is no missing value in collector number, then the herbarium columns might be empty.
+
+*Loading the example data*
+
+```{r, tidy=TRUE, results='asis'}
+
+data(monographaR_examples)
+monographaR_examples$collectorList -> data
+
+```
+
+*This is how the table should be:*
+
+```{r, echo=FALSE, results='asis'}
+data(monographaR_examples)
+monographaR_examples$collectorList -> data
+knitr::kable(head(data, 5), align="l")
+```
+
+Now, to **run** the function just type the command below. It will print in the terminal the output. To export a txt, place a name in the filename argument (i.e., filename = "myoutput.txt"). 
+
+```{r, tidy=TRUE, message=FALSE, eval=FALSE}
+
+collectorList(data, filename = "", paragraphs = FALSE)
+
+```
+
+*This is the output:*
+
+__________________________________________________________
+
+```{r, echo=FALSE, message=FALSE, results='asis'}
+
+collectorList(data, filename = "", paragraphs = FALSE)
+
+```
+
+__________________________________________________________
+
+
+
+### examinedSpecimens
+
+This function will generate a txt file with an examined specimens list. It requires a data.frame with eight columns, ordered as: species, collector name, collector number, herbarium acronym, herbarium number, country, state, and municipality.
+
+*Loading the example data*
+
+```{r, tidy=TRUE, results='asis'}
+
+data(monographaR_examples)
+monographaR_examples$examinedSpecimens -> data
+
+```
+
+*This is how the table should be:*
+
+```{r, echo=FALSE, results='asis'}
+data(monographaR_examples)
+monographaR_examples$examinedSpecimens -> data
+colnames(data)[2:3] <- c("Collector", "Number")
+knitr::kable(head(data, 5), align="l")
+```
+
+Now, to **run** the function just type the command below. It will print in the terminal the output. To export a txt, place a name in the filename argument (i.e., filename = "myoutput.txt"). 
+
+```{r, tidy=TRUE, message=FALSE, eval=FALSE}
+
+examinedSpecimens(data, filename = "")
+
+```
+
+*This is the output:*
+
+__________________________________________________________
+
+
+```{r, echo=FALSE, message=FALSE, results='asis'}
+
+examinedSpecimens(data, filename = "")
+
+```
+
+__________________________________________________________
+
+
+### tableToDescription
+
+This function will generate a txt file with species descriptions. It requires a data.frame where the first three columns are the character description, putative complement and the character to use as separator (i.e., words that will remain constant across descriptions). The character description and/or the complement might be empty. The remaining columns are the species with their respective character states, where each row is a character. The function accepts any number of species and/or characters.
+
+*Loading the example data*
+
+```{r, tidy=TRUE, results='asis'}
+
+data(monographaR_examples)
+monographaR_examples$tableToDescription -> data
+
+```
+
+*This is how the table should be:*
+
+```{r, echo=FALSE, results='asis'}
+data(monographaR_examples)
+monographaR_examples$tableToDescription -> data
+knitr::kable(head(data[,1:5], 5), align="l")
+```
+
+Now, to **run** the function just type the command below. The first column is just an identifier for the characters. We need to remove it before running the function. To export a txt, place a name in the filename argument (i.e., filename = "myoutput.txt"). 
+
+```{r, eval=FALSE}
+
+data[,-1] -> data  ## removing first column
+tableToDescription(data, filename = "")
+
+```
+
+*This is the output:*
+
+__________________________________________________________
+
+```{r, echo=FALSE, message=FALSE, results='asis'}
+
+data[,-c(1,8)] -> data
+tableToDescription(data, filename = "")
+
+```
+
+__________________________________________________________
+
+
+### buildMonograph
+
+This function wraps around the previous three functions (tableToDescription, examinedSpecimens and collectorList) generating a monograph draft in MS-Word or html format. The resulting monograph skeleton will include the taxonomic heading, the description, comments and examined specimens list for all species found in the input tables, and it will append the collector list in the end of the file. It requires four tables as input. Three of them are the same tables used for "tableToDescription", "collectorList" and "examinedSpecimens" functions. The additional input table should have three columns: species, taxonomic heading and comments. It uses functions of the rmarkdown package to export the output file. 
+
+*Loading the example data*
+  
+```{r, tidy=TRUE, results='asis'}
+
+data(monographaR_examples)
+monographaR_examples$taxonomic_headings -> taxonomic.headings
+monographaR_examples$collectorList -> col.d
+monographaR_examples$examinedSpecimens -> exam.d
+monographaR_examples$tableToDescription -> desc.d
+desc.d[,-1] -> desc.d
+
+```
+
+*This is how the headings table should be:*
+  
+```{r, echo=FALSE, results='asis'}
+data(monographaR_examples)
+monographaR_examples$taxonomic_headings -> headings
+knitr::kable(headings, align="l")
+```
+
+Now, to **run** the function just type the command below. It will export a MS-Word file (if output="Word") or a html file (if output = "html") to your working directory.
+
+```{r, tidy=FALSE, eval=FALSE}
+
+buildMonograph(headings=taxonomic.headings,collectorList.data = col.d, examinedSpecimens.data =
+  exam.d, tableToDescription.data = desc.d, output = "Word", title="Monograph skeleton")
+
+
+```
+
+
+__________________________________________________________
+
+*See the help of the function for options.* Type:
+  
+  - help("buildMonograph")
+
+
+### phenoHist
+
+This wrapper function will generate circular histograms of phenology, using functions of the package circular. It requires a data.frame with three columns, ordered as: species, month and phenology. The month column should be numeric (month number), while the phenology column must have these values: "Flower", "Fruit" and/or "Both". If any of these are missing is possible to indicate in the "flower", "fruit" and "both" arguments (both="missing"). The function will plot the bars indicating flower observations in white, and fruits in gray by default (is possible to change it with the "flower.col", "flower.border", "fruit.col" and "fruit.border" arguments). The size of the bar corresponds to number of observations. The arguments "shrink", "axis.cex" and "title.cex" control sizes, while the mfrow changes the number of histograms plotted at the same page (rows, columns).
+
+*Loading the example data*
+
+```{r, tidy=TRUE, results='asis'}
+
+data(monographaR_examples)
+monographaR_examples$phenoHist -> data
+
+```
+
+*This is how the table should be:*
+
+```{r, echo=FALSE, results='asis'}
+data(monographaR_examples)
+monographaR_examples$phenoHist -> data
+knitr::kable(head(data, 5), align="l")
+```
+
+Now, to **run** the function just type the command below. It will plot the histograms. To export a pdf, set "pdf=TRUE". 
+
+```{r, tidy=TRUE, eval=FALSE}
+
+phenoHist(data, shrink=1.1, axis.cex=0.8, title.cex=1, pdf=FALSE)
+
+
+```
+
+*This is the output:*
+
+__________________________________________________________
+
+```{r, echo=FALSE,  message=FALSE, fig.width=3.45}
+
+par(mar=c(2,2,2,2)) ## this is just to adjust the margins of the figures
+
+phenoHist(data, shrink=1.1, axis.cex=0.8, title.cex=1, pdf=FALSE)
+
+
+```
+
+__________________________________________________________
+
+*See the help of the function for customization options.* Type:
+
+- help("phenoHist")
+
+### mapPhenology
+
+This wrapper function will generate heatmaps of phenology across a time range. The default is to produce 12 heatmaps plotted on a single plate. This can be changed with the argument time.range, where any numerical range can be provided (representing weeks for instance). The argument mfrow controls the plate layout. It requires a data.frame with four columns, ordered as: species, longitude, latitude and phenology. The phenology column should be numeric (i.e., the number of the month, week or day the specimen was collected with flower/fruit). It is possible to change the resolution of the resulting rasters. The function can produce presence/absence heatmaps (if binary = T) or abundance heatmaps (if binary = F). The abundance values are relative (divided by the maximum abundance observed across all rasters). The function returns a rasterStack that can be exported or used in customized plots. To export a pdf, set "pdf=TRUE". 
+
+*Loading the example data*
+
+```{r, tidy=TRUE, results='asis'}
+
+data(monographaR_examples)
+monographaR_examples$mapPhenology -> data
+
+```
+
+*This is how the table should be:*
+
+```{r, echo=FALSE, results='asis'}
+data(monographaR_examples)
+monographaR_examples$mapPhenology -> data
+knitr::kable(head(data, 5), align="l")
+```
+
+Now, to **run** the function just type the command below. In this case it will plot 12 phenology heatmaps. To export a pdf, set "pdf=TRUE". 
+
+```{r, tidy=TRUE, eval=FALSE}
+
+mapPhenology(data, binary=F, by_species=F, legend=F)
+
+
+```
+
+*This is the output:*
+
+__________________________________________________________
+
+```{r, echo=FALSE, message=FALSE, fig.width=7, fig.height=9}
+
+par(mar=c(2,2,2,2))
+
+mapPhenology(data, binary=F, by_species=F, legend=F)
+
+
+```
+
+__________________________________________________________
+
+It is possible to create an animation (GIF) of the phenology across time. There are several options to do that. One possibility is to use the animation package.
+
+```{r, tidy=TRUE, eval=FALSE}
+
+require(animation)
+
+saveGIF(
+  {mapPhenology(data, binary=F, resolution=0.5, by_species=F, legend=F, mfrow=c(1,1))},
+  movie.name="phenology.gif", interval=0.5, ani.width=600, ani.height=600
+)
+
+
+```
+
+*See the help of the function for customization options.* Type:
+
+- help("mapPhenology")
+
+
+### mapBatch
+
+This wrapper function will export maps for all species in data. The function has two output options: a single pdf with all maps (export = "pdf") or individual tiff files for each species (export = "tiff"). It requires a data.frame with three columns, ordered as: species, longitude and latitude. If zoom = TRUE, the function will set the limits of the plot using the distribution of each species plus the margin (relative value). If zoom = FALSE, the function will use the distribution of the whole data to set the limits (all maps will have the same limits). Colors can be changed with the arguments points.col, shape.col, shape.border, while the size of the points can be changed with points.cex. A raster layer can be provided (elevation for instance), and the colors of the raster are controlled by raster.col. Optionally, the user can provide a single or a list of shape files (type = "user").
+
+*Loading the example data*
+
+```{r, tidy=TRUE, results='asis'}
+
+data(monographaR_examples)
+monographaR_examples$map_data -> data
+
+```
+
+*This is how the table should be:*
+
+```{r, echo=FALSE, results='asis'}
+data(monographaR_examples)
+monographaR_examples$map_data -> data
+knitr::kable(head(data, 5), align="l")
+```
+
+Now, to **run** the function just type the command below. It will export the maps as a pdf (export = "pdf") or tiff images (export = "tiff").
+
+```{r, tidy=TRUE, eval=FALSE}
+
+mapBatch(data , zoom=T, margin=2, points.col="black", points.border="white", shape.col="gray90", points.cex=1.5, shape.border = "gray90", export="pdf")
+
+```
+
+*This is the output:*
+
+__________________________________________________________
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=3.45}
+library(maptools)
+library(raster)
+data(monographaR_examples)
+monographaR_examples$map_data -> data
+data("wrld_simpl")
+colnames(data) <- c("sp", "x", "y")
+geo <- data
+coordinates(geo) <- ~x + y
+spp <- as.character(unique(data[, 1]))
+spp <- sort(spp)
+margin = 0.1; shape.border = "black"; shape.col = "white"; points.col = "black"; points.border = "gray50"; points.cex = 1
+
+par(mar=c(0,0,1,0))
+par(cex.main=0.7)
+
+for (i in 1:4) {
+  sp <- spp[i]
+  spRows <- which(data$sp == sp)
+  spData <- data[spRows, ]
+  xy <- spData
+  coordinates(xy) <- ~x + y
+  ext <- extent(xy) * (margin + +1)
+  xlim <- c(ext[1], ext[2])
+  ylim <- c(ext[3], ext[4])
+  plot(wrld_simpl, xlim = xlim, ylim = ylim, axes = T, 
+         col = shape.col, border = shape.border, add = F, 
+         asp = 1)
+  plot(xy, pch = 21, col = points.border, bg = points.col, 
+       cex = points.cex, add = T)
+  box()
+  title(sp)
+}
+
+```
+
+__________________________________________________________
+
+*See the help of the function for customization options.* Type:
+
+- help("mapBatch")
+
+
+### mapDiversity
+
+This function will generate a diversity heatmap using presence/absence of species on grid cells. It requires a data.frame with three columns, ordered as: species, longitude and latitude. The function will plot and return a raster object. The resolution of the grid can be changed by the argument "resolution" (in degrees). It uses functions of the package raster.
+
+
+*Loading the example data*
+
+```{r, tidy=TRUE, results='asis'}
+
+data(monographaR_examples)
+monographaR_examples$map_data -> data
+
+```
+
+*This is how the table should be:*
+
+```{r, echo=FALSE, results='asis'}
+data(monographaR_examples)
+monographaR_examples$map_data -> data
+knitr::kable(head(data, 5), align="l")
+```
+
+Now, to **run** the function just type the command below. It will plot the diversity map. Alternatively, you can export the resulting raster layer (set export = T). This layer can be visualized in a standard GIS program.
+
+```{r, tidy=TRUE, eval=FALSE}
+
+mapDiversity(data , resolution=1, plot=TRUE, plot.with.grid=TRUE, legend = T, export = F)
+
+```
+
+*This is the plot:*
+
+__________________________________________________________
+
+```{r, fig.align='center',  warning=FALSE, message=FALSE, echo=328, fig.width=7, fig.height=3.8}
+
+par(mar=c(0,0,0,0)) ## this is just to adjust the margins of the figures
+
+mapDiversity(data , resolution=1, plot=TRUE, plot.with.grid=TRUE, legend = T)
+
+
+```
+
+__________________________________________________________
+
+*See the help of the function for customization options.* Type:
+
+- help("mapDiversity")
+
+
+### mapTable
+
+This function will generate a presence/absence matrix based on a grid (if type="grid") or on countries (if type="countries"). It requires a data.frame with three columns, ordered as: species, longitude and latitude. The resolution of the grid can be changed by the argument "resolution" (in degrees). It uses functions of the package raster.
+
+
+*Loading the example data*
+
+```{r, tidy=TRUE, results='asis'}
+
+data(monographaR_examples)
+monographaR_examples$map_data -> data
+
+```
+
+*This is how the table should be:*
+
+```{r, echo=FALSE, results='asis'}
+data(monographaR_examples)
+monographaR_examples$map_data -> data
+knitr::kable(head(data, 5), align="l")
+```
+
+Now, to **run** the function just type the command below. In this first case, we are running with the grid option (type = "grid"). It will generate a "list" object with a presence/absence matrix and the grid used. You can export the results (write.output = T). The output table can be visualized in a spreadsheet program and the grid in a standard GIS program.
+
+```{r, tidy=TRUE, eval=FALSE}
+
+map.table <- mapTable(data, type="grid", resolution=3, write.output=FALSE)
+  
+map.table$table
+
+```
+
+*These are the outputs:*
+
+__________________________________________________________
+
+```{r, fig.align='center',  message=FALSE, echo=380, fig.width=7, fig.height=3.8}
+
+par(mar=c(0,0,0,0)) ## this is just to adjust the margins of the figures
+
+map.table <- mapTable(data, type="grid", resolution=3, write.output=FALSE)
+knitr::kable(head(map.table$table[,1:26], 5), align="l")
+
+```
+
+__________________________________________________________
+
+*See the help of the function for customization options.* Type:
+
+- help("mapTable")
+
+
+
+## Script example
+
+You can start your monographaR script using the examples in the next lines. Go to "File" $\rightarrow$ "New File...R script", and create a new script file. Copy the lines below and paste into the new script. For starters, just replace the working directory and the table names (...csv) to use it with your own data. But see the help files of the functions for further customizations. Have fun. 
+
+
+
+__________________________
+
+
+
+library(monographaR)
+&nbsp;
+
+\### change your working directory ###  
+setwd("C:/My_working_directory")  
+
+&nbsp;
+
+\############################### \
+\##### tableToDescription \
+\############################### \  
+
+read.csv("tableToDescription_data.csv") -> data  
+data[,-1] -> data  
+head(data)  ## this command just shows the first rows of the table, good to see if it is OK  
+
+tableToDescription(data, filename="species_descriptions.txt")
+  
+&nbsp;
+
+\############################### \
+\##### examinedSpecimens \
+\############################### \  
+
+read.csv("examinedSpecimens_data.csv") -> data  
+head(data)  
+
+examinedSpecimens(data=data, filename="examined_material.txt")
+
+&nbsp;
+
+\############################### \
+\##### collectorList \
+\############################### \  
+
+read.csv("collectorList_data.csv") -> data  
+head(data)  
+
+collectorList(data, filename="collector_list.txt", paragraphs=FALSE)
+
+&nbsp;
+
+\############################### \
+\##### buildMonograph \
+\############################### \  
+
+read.csv("headings.csv") -> taxonomic.headings   
+read.csv("tableToDescription_data.csv") -> desc.data   
+desc.data[,-1] -> desc.data   
+read.csv("examinedSpecimens_data.csv") -> exam.data   
+read.csv("collectorList_data.csv") -> col.data  
+
+buildMonograph(headings=taxonomic.headings, collectorList.data = col.data, 
+       examinedSpecimens.data = exam.data, tableToDescription.data = desc.data, 
+             output = "Word", title="Monograph skeleton")
+
+&nbsp;
+
+\############################### \
+\##### phenoHist \
+\############################### \  
+
+read.csv("phenoHist_data.csv") -> data  
+head(data)  
+
+phenoHist(data, mfrow=c(2,2), shrink=1.2, axis.cex=1.5, title.cex=1.5, pdf=T, filename="phenology.pdf") 
+
+&nbsp;
+
+\############################### \
+\##### mapBatch \
+\############################### \  
+
+read.csv("mapBatch_data.csv") -> data  
+
+mapBatch(data, zoom=T, margin=2, points.col="black", points.border="white", shape.col="gray90", points.cex=1.5, shape.border="gray90", export="tiff")
+
+&nbsp;
+
+\############################### \
+\##### mapDiversity \
+\############################### \  
+
+read.csv("mapDiversity_data.csv") -> data  
+
+mapDiversity(data, resolution=1, plot=T, plot.with.grid=F, legend=F)
+
+mapDiversity(data, resolution=1, plot=T, plot.with.grid=T) -> diversity.map  
+
+plot(diversity.map)  
+
+pdf("mapDiversity.pdf")  
+mapDiversity(data, resolution=1, plot=T, plot.with.grid=T)  
+dev.off()
+
+&nbsp;
+
+\############################### \
+\##### mapTable \
+\############################### \  
+
+read.csv("mapDiversity_data.csv") -> data  
+
+map.table <- mapTable(data, type="grid", resolution=3, write.output=F)
+  
+map.table\$table \
+t(map.table\$table) \
+
+map.table\$grid -> grid \
+
+data(wrld_simpl)  
+plot(grid, border="white")  
+plot(wrld_simpl, add=T)  
+plot(grid, add=T)  
+text(grid, grid\@data$layer, cex=1)  
+
+map.table.country <- mapTable(data, type="country")  
+map.table.country  
+
+
+
+__________________________
+
+
+## Citation
+
+If you use **monographaR**, please cite:
+
+Reginato, M. (2016) monographaR: an R package to facilitate the production of plant taxonomic monographs. Brittonia 68(2): 212-216.

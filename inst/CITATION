@@ -1,0 +1,13 @@
+citHeader("To cite monographaR in publication use:")
+
+citEntry(
+	entry="Article",
+	title="monographaR: an R package to facilitate the production of plant taxonomic monographs.",
+	author="Marcelo Reginato",
+	journal="Brittonia",
+	year=2016,
+	volume="68(2)",
+	pages="212-216",
+	textVersion="Reginato, M. (2016) monographaR: an R package to facilitate the production of plant taxonomic monographs. Brittonia 68(2): 212-216"	   
+)
+

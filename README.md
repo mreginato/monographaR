@@ -12,9 +12,12 @@ install_github("mreginato/monographaR")
 
 ## Help
 
-[Manual](https://cran.r-project.org/web/packages/monographaR/monographaR.pdf)
-[Tutorial](https://cran.r-project.org/web/packages/monographaR/vignettes/tutorial.html)
-[Tutorial - português](https://github.com/mreginato/Mini-curso_monographaR)
+[Manual](https://cran.r-project.org/web/packages/monographaR/monographaR.pdf)  
+
+[Tutorial](https://cran.r-project.org/web/packages/monographaR/vignettes/tutorial.html)  
+
+[Tutorial - português](https://github.com/mreginato/Mini-curso_monographaR)  
+
 
 ## Citation
 

@@ -2,4 +2,4 @@
 
 Beta version.
 
-Stable versio can be installed through CRAN.
+Stable version can be installed through CRAN.

@@ -1,6 +1,6 @@
 # monographaR: Taxonomic Monographs Tools
 
-This repository might have include a beta version of the package. The stable version can be installed through CRAN.
+This repository might have a beta version of the package. The stable version can be installed through CRAN.
 
 ## Installation
 
@@ -9,6 +9,12 @@ install.packages("devtools")
 library(devtools)
 
 install_github("mreginato/monographaR")
+
+## Help
+
+[Manual](https://cran.r-project.org/web/packages/monographaR/monographaR.pdf)
+[Tutorial](https://cran.r-project.org/web/packages/monographaR/vignettes/tutorial.html)
+[Tutorial - português](https://github.com/mreginato/Mini-curso_monographaR)
 
 ## Citation
 

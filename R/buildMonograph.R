@@ -1,4 +1,5 @@
-buildMonograph <- function(headings, tableToDescription.data, examinedSpecimens.data=NULL, collectorList.data=NULL, output="Word", title="Taxonomic treatment", open=TRUE) {
+buildMonograph <-
+function(headings, tableToDescription.data, examinedSpecimens.data=NULL, collectorList.data=NULL, output="Word", title="Taxonomic treatment", open=TRUE) {
    
   if (class(headings) != "data.frame") {
     stop("headings must be a data.frame")

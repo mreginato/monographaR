@@ -33,7 +33,9 @@ Reginato, M. (2016) monographaR: an R package to facilitate the production
 of plant taxonomic monographs. Brittonia 68(2): 212-216.
 }
 
-\keyword{ taxonomy, monographs }
+\keyword{ monograph }
+\concept{ taxonomy }
+\concept{ systematics }
 \seealso{
 \code{\link[circular:circular-package]{circular}}
 \code{\link[maptools:readShapePoly]{maptools}}

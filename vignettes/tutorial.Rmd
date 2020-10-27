@@ -16,7 +16,7 @@ Taxonomic monographs are important source of biological information. The product
 
 ## Installing monographaR
 
-To use monographaR you need to have [R installed](https://cran.r-project.org/), and optionally [Rstudio](https://www.rstudio.com/products/rstudio/download/) (recommended). After R and Rstudio are installed, you need to install monographaR. Open Rstudio and go to "Tools" $\rightarrow$ "Install Packages"; and install the package from the CRAN repository. Alternatively, you can type the following command in the terminal:
+To use monographaR you need to have [R installed](https://cran.r-project.org/), and optionally [Rstudio](https://rstudio.com/products/rstudio/download/) (recommended). After R and Rstudio are installed, you need to install monographaR. Open Rstudio and go to "Tools" $\rightarrow$ "Install Packages"; and install the package from the CRAN repository. Alternatively, you can type the following command in the terminal:
 
 ```{r, eval=FALSE}
 install.packages("monographaR", dependencies=T)

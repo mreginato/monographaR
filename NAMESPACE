@@ -1,4 +1,4 @@
-export(buildMonograph, collectorList, examinedSpecimens, mapBatch, mapDiversity, mapPhenology, mapTable, phenoHist, tableToDescription)
+export(buildMonograph, collectorList, examinedSpecimens, interactiveKey, interactiveKeyLabels, mapBatch, mapDiversity, mapPhenology, mapTable, phenoHist, tableToDescription)
 
 import(maptools, raster)
 

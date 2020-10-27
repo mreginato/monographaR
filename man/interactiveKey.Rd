@@ -1,6 +1,5 @@
 \name{interactiveKey}
 \alias{interactiveKey}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Interactive key (shiny app)
 }
@@ -50,6 +49,8 @@ Marcelo Reginato
 \examples{
 
 ## see vignette
+data(monographaR_examples)
+monographaR_examples$interactiveKey
 
 }
 

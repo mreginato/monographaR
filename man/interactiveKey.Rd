@@ -50,3 +50,5 @@ Marcelo Reginato
 \examples{
 
 ## see vignette
+
+}

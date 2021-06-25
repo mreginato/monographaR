@@ -1,4 +1,5 @@
-interactiveKey <- function(dat=NULL, txt.labels=NULL, poly.sep="/", state.sep=" = ", taxa.in.italics=TRUE, theme = "lumen") {
+interactiveKey <-
+function(dat=NULL, txt.labels=NULL, poly.sep="/", state.sep=" = ", taxa.in.italics=TRUE, theme = "lumen") {
   if (is.null(txt.labels)) {
     interactiveKeyLabels() -> txt.labels
   }

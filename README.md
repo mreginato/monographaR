@@ -4,7 +4,7 @@ This repository might have a beta version of the package. The stable version can
 
 ## Installation
 
-if (!require("devtools", quietly = TRUE)) {install.packages("devtools")}
+if (!require("devtools", quietly = TRUE)) {install.packages("devtools")}   
 install_github("mreginato/monographaR", dependencies=T)
 
 ## Help

@@ -393,8 +393,13 @@ mapBatch(data , zoom=T, margin=2, points.col="black", points.border="white", sha
 __________________________________________________________
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=3.45}
-library(maptools)
+library(rnaturalearth)
+library(sf)
+library(sp)
 library(raster)
+ne_countries(type="countries", returnclass = "sv") -> wrld_simpl
+st_as_sf(wrld_simpl) -> wrld_simpl
+as_Spatial(wrld_simpl) -> wrld_simpl
 data(monographaR_examples)
 monographaR_examples$map_data -> data
 data("wrld_simpl")

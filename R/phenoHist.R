@@ -1,6 +1,6 @@
 phenoHist <-
 function(data=data, mfrow=c(1,1), shrink=1.2, axis.cex=1.5, title.cex=1.5, pdf=F, height=11, width=8.5, filename="phenology.pdf", flower="Flower", fruit="Fruit", both="Both", flower.col=NULL, flower.border="black", fruit.col="darkgray", fruit.border="darkgray", mar=c(2,2,2,2)) {
-  if (class(data) != "data.frame") {
+  if (inherits(data, "data.frame") == FALSE) {
     stop("data must be a data.frame")
   }
   if (ncol(data) != 3) {

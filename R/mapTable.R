@@ -1,6 +1,7 @@
 mapTable <-
 function(data, type="grid", resolution=1, pres.abs=TRUE, write.output=FALSE, layer=NULL) {
-if (class(data) != "data.frame") {
+
+if (inherits(data, "data.frame") == FALSE) {
   stop("data must be a data.frame")
 }
 if (ncol(data) != 3) {
@@ -31,7 +32,10 @@ wrld_simpl = NULL
     }
     r0[cells$cells] <- cells$new.cells
     rasterToPolygons(r0) -> grid
-    data(wrld_simpl, envir = environment())
+    #data(wrld_simpl, envir = environment())
+    ne_countries(type="countries", returnclass = "sv") -> wrld_simpl
+    st_as_sf(wrld_simpl) -> wrld_simpl
+    as_Spatial(wrld_simpl) -> wrld_simpl
     plot(geo.data, col=NA)
     plot(wrld_simpl, add=T)
     plot(grid, add=T)
@@ -49,15 +53,19 @@ wrld_simpl = NULL
     list(grid=grid, table=cells) -> result
     if (write.output == T) {
       write.csv(cells, "mapTable.csv")
-      writeSpatialShape(grid, "mapTable_grid.shp", factor2char = TRUE, max_nchar=254)
+      vect(grid) -> grid
+      writeVector(grid, filename="mapTable_grid.shp", filetype="ESRI Shapefile")
       cat("Presence/absence matrix and the grid (shapefile) were saved in:")
       cat("\n", getwd())
     }
   }
   if (type == "country") {
-    data(wrld_simpl, envir = environment())
+    #data(wrld_simpl, envir = environment())
+    ne_countries(type="countries", returnclass = "sv") -> wrld_simpl
+    st_as_sf(wrld_simpl) -> wrld_simpl
+    as_Spatial(wrld_simpl) -> wrld_simpl
     suppressWarnings(proj4string(wrld_simpl)) -> proj4string(geo.data)
-    data.frame(sp=data[,1], over(geo.data, wrld_simpl)$NAME) -> countries
+    data.frame(sp=data[,1], over(geo.data, wrld_simpl)$admin) -> countries
     unique(countries) -> countries
     as.character(countries[,2]) -> countries[,2]
     colnames(countries)[2] <- "Country"

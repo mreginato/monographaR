@@ -1,19 +1,19 @@
 buildMonograph <-
 function(headings, tableToDescription.data, examinedSpecimens.data=NULL, collectorList.data=NULL, output="Word", title="Taxonomic treatment", open=TRUE) {
    
-  if (class(headings) != "data.frame") {
+  if (inherits(headings, "data.frame") == FALSE) {
     stop("headings must be a data.frame")
   }
   if (ncol(headings) != 3) {
     stop("headings must have 3 columns, see help(\"buildMonograph\")")
   }
-  if (class(tableToDescription.data) != "data.frame") {
+  if (inherits(tableToDescription.data, "data.frame") == FALSE) {
     stop("tableToDescription.data must be a data.frame")
   }
   if (is.null(examinedSpecimens.data)) {
     include.specimens = F
   } else {
-    if (class(examinedSpecimens.data) != "data.frame") {
+    if (inherits(examinedSpecimens.data, "data.frame") == FALSE) {
       stop("examinedSpecimens.data must be a data.frame")
     }
     if (ncol(examinedSpecimens.data) != 8) {
@@ -25,7 +25,7 @@ function(headings, tableToDescription.data, examinedSpecimens.data=NULL, collect
   if (is.null(collectorList.data)) {
     include.collector = F
   } else {
-    if (class(collectorList.data) != "data.frame") {
+    if (inherits(collectorList.data, "data.frame") == FALSE) {
       stop("collectorList.data must be a data.frame")
     }
     if (ncol(collectorList.data) < 3 | ncol(collectorList.data) == 4 | ncol(collectorList.data) > 5) {

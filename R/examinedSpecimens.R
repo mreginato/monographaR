@@ -1,6 +1,6 @@
 examinedSpecimens <-
 function(data, filename="examined.txt") {
-  if (class(data) != "data.frame") {
+  if (inherits(data, "data.frame") == FALSE) {
     stop("data must be a data.frame")
   }
   if (ncol(data) != 8) {

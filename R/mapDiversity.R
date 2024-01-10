@@ -1,6 +1,6 @@
 mapDiversity <-
 function(data, resolution=1, plot=T, plot.with.grid=T, col=rev(terrain.colors(55)), alpha=0.8, export=F, legend=T, filename="diversity_map") {
-  if (class(data) != "data.frame") {
+  if (inherits(data, "data.frame") == FALSE) {
     stop("data must be a data.frame")
   }
   if (ncol(data) != 3) {
@@ -29,11 +29,14 @@ function(data, resolution=1, plot=T, plot.with.grid=T, col=rev(terrain.colors(55
     writeRaster(r0, filename=paste(filename,".asc", sep=""), overwrite=T)
     if (plot.with.grid == T) {
       rasterToPolygons(r0) -> grid
-      writePolyShape(grid, fn=paste(filename,"_grid.shp", sep=""))
+      vect(grid) -> grid
+      writeVector(grid, filename=paste(filename,"_grid.shp", sep=""), filetype="ESRI Shapefile")
     }
   }
   if (plot == T) {
-    data(wrld_simpl, envir = environment())
+    ne_countries(type="countries", returnclass = "sv") -> wrld_simpl
+    st_as_sf(wrld_simpl) -> wrld_simpl
+    as_Spatial(wrld_simpl) -> wrld_simpl
     plot(geo, col=NA)
     plot(wrld_simpl, add=T)
     plot(r0, add=T, legend=legend, col=col, alpha=alpha)

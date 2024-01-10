@@ -23,7 +23,8 @@ function (dat, cost=NULL, clean.characters=T, cp=0.01) {
       tfun(frame$yval, ylevel, digits)
     else tfun(frame$yval2, ylevel, digits)
   } else { format(signif(frame$yval, digits)) }
-  depth <- rpart:::tree.depth(node)
+  tree.depth <- utils::getFromNamespace("tree.depth", "rpart")
+  depth <- tree.depth(node)
   term <- rep(" ", length(depth))
   term[frame$var == "<leaf>"] <- "*"
   z <- labels(x, digits = digits, minlength = minlength)

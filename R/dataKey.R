@@ -1,4 +1,5 @@
-dataKey <- function(dat, poly.sep="/", return.summary=T) {
+dataKey <-
+function(dat, poly.sep="/", return.summary=T) {
   colnames(dat)[1] <- "species"
   as.matrix(dat) -> dat
   dat.s <- apply(dat, MARGIN=2, FUN=function(x)(grep(poly.sep, x, fixed=T)))

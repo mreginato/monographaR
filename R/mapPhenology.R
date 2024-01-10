@@ -1,6 +1,6 @@
 mapPhenology <-
 function(data, resolution=1, time.range=c(1:12), label="Month", binary=T, by_species=F, plot=T, col=rev(heat.colors(12)), alpha=0.8, mfrow=c(4,3), legend=T, pdf=F, height=11, width=8.5, filename="mapPhenology.pdf") {
-  if (class(data) != "data.frame") {
+  if (inherits(data, "data.frame") == FALSE) {
     stop("data must be a data.frame")
   }
   if (ncol(data) != 4) {
@@ -49,7 +49,9 @@ function(data, resolution=1, time.range=c(1:12), label="Month", binary=T, by_spe
     pdf(filename, height=height, width=width)
   }
   if (plot) {
-    data(wrld_simpl, envir = environment())
+    ne_countries(type="countries", returnclass = "sv") -> wrld_simpl
+    st_as_sf(wrld_simpl) -> wrld_simpl
+    as_Spatial(wrld_simpl) -> wrld_simpl
     par()$mfrow -> x
     par(mfrow=mfrow)
     for (i in 1:length(time.range)) {

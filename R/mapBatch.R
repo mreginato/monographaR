@@ -10,7 +10,7 @@ function (data, zoom = T, margin = 0.1, axes = T, shape=NULL,
           minimap.points.border = "gray50", minimap.points.cex = 1, minimap.extent = NULL,
           minimap.rect.fill = NA, minimap.rect.border = NULL, maxpixels=100000, ...) 
 {
-  if (class(data) != "data.frame") {
+  if (inherits(data, "data.frame") == FALSE) {
     stop("data must be a data.frame")
   }
   if (ncol(data) != 3) {
@@ -24,7 +24,9 @@ function (data, zoom = T, margin = 0.1, axes = T, shape=NULL,
   }
   wrld_simpl = NULL	
   if (is.null(shape)) {
-    data(wrld_simpl, envir = environment())
+    ne_countries(type="countries", returnclass = "sv") -> wrld_simpl
+    st_as_sf(wrld_simpl) -> wrld_simpl
+    as_Spatial(wrld_simpl) -> wrld_simpl
     wrld_simpl -> shape
   }
   if (add.minimap) { 
@@ -88,7 +90,7 @@ function (data, zoom = T, margin = 0.1, axes = T, shape=NULL,
       xlim <- c(ext[1], ext[2])
       ylim <- c(ext[3], ext[4])
     }
-    if (class(shape) == "list") {
+    if (inherits(shape, "list")) {
       plot(shape[[1]], xlim = xlim, ylim = ylim, axes = axes, 
            col = shape.col, border = shape.border, add = F, 
            asp = 1, ...)
@@ -122,7 +124,7 @@ function (data, zoom = T, margin = 0.1, axes = T, shape=NULL,
         plotRGB(RGB, add=T, maxpixels=maxpixels)
       }
       plot(shape, xlim = xlim, ylim = ylim, axes = axes, 
-           col = shape.col, border = shape.border, add = F, 
+           col = shape.col, border = shape.border, add = T, 
            asp = 1)
       if (is.null(raster) == F) {
         if (hillshade == T) {
@@ -141,7 +143,7 @@ function (data, zoom = T, margin = 0.1, axes = T, shape=NULL,
     if (title) { title(sp) }
     if (add.minimap) {
       if (is.null(minimap.shape)) { 
-        if (class(shape) == "list") {
+        if (inherits(shape, "list")) {
           shape[[length(shape)]] -> minimap.shape
         } else {
           shape -> minimap.shape

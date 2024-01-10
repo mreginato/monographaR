@@ -1,6 +1,6 @@
 tableToDescription <-
 function(data, filename="species_descriptions.txt") {
-  if (class(data) != "data.frame") {
+  if (inherits(data, "data.frame") == FALSE) {
     stop("data must be a data.frame")
   }
   message("Assuming the columns are ordered as: Character_in_description, complement, separator, and the species in the remaining columns")
@@ -8,7 +8,7 @@ function(data, filename="species_descriptions.txt") {
   data.frame(as.matrix(data), stringsAsFactors = F) -> data
   data[,1:3] -> model
   data[,4:ncol(data)] -> spp.data
-  if (class(spp.data) != "data.frame") {
+  if (inherits(spp.data, "data.frame") == FALSE) {
     data.frame(as.matrix(spp.data), stringsAsFactors = F) -> spp.data
     colnames(spp.data) <- colnames(data)[4]
   }

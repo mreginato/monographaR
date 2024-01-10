@@ -1,6 +1,6 @@
 collectorList <-
 function(data = data, filename="collector_list.txt", paragraphs=TRUE) {
-  if (class(data) != "data.frame") {
+  if (inherits(data, "data.frame") == FALSE) {
     stop("data must be a data.frame")
   }
   if (ncol(data) < 3 | ncol(data) == 4 | ncol(data) > 5) {

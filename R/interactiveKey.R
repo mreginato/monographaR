@@ -3,7 +3,9 @@ function(dat=NULL, txt.labels=NULL, poly.sep="/", state.sep=" = ", taxa.in.itali
   if (is.null(txt.labels)) {
     interactiveKeyLabels() -> txt.labels
   }
-  data("int.key.code", package = "monographaR", envir = environment())
+  keyCode = NULL
+  data("keyCode", package = "monographaR", envir = environment())
+  keyCode -> int.key.code
   int.key.code$server -> server.code
   int.key.code$ui -> ui.code
   int.key.code$about -> about.code

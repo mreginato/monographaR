@@ -143,7 +143,7 @@ the arguments points.col, shape.col, shape.border, while the size of the
 points can be changed with points.cex. A raster layer can be provided 
 (elevation for instance), and the colors of the raster are controlled by 
 raster.col. The user can provide a single or a list of shape files, 
-otherwise the \code{\link[maptools:wrld_simpl]{maptools}} map is used.
+otherwise the \code{\link[rnaturalearth:ne_countries]{rnaturalearth}} map is used.
 }
 \value{
 Exports a pdf or image files.
@@ -152,7 +152,6 @@ Exports a pdf or image files.
 Marcelo Reginato
 }
 \seealso{
-\code{\link[maptools:readShapePoly]{maptools}}
 \code{\link[raster:raster-package]{raster}}
 }
 \examples{

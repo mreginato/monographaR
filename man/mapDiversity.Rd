@@ -84,10 +84,10 @@ mapDiversity(data , resolution=1, plot=TRUE, alpha=0.5)
 
 ## The function returns a raster object
 
-mapDiversity(data , resolution=1, plot=TRUE, alpha=0.5) -> my.div.raster
+mapDiversity(data , resolution=1, plot=TRUE, alpha=0.5, plot.with.grid=FALSE) -> my.div.raster
 my.div.raster
-plot(my.div.raster)
-
+# plot(my.div.raster)
+# writeRaster(my.div.raster, "mydivraster.tif")
 
 }
 

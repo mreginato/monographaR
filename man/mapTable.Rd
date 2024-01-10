@@ -29,7 +29,7 @@ logical
 logical
 }
   \item{layer}{
-Spatial DataFrame object, see \code{\link[maptools:readShapeSpatial]{readShapeSpatial}}
+Spatial DataFrame object
 }
 }
 \details{
@@ -37,7 +37,7 @@ It requires a data.frame with three columns, ordered as:
 species, longitude and latitude. The resolution of the grid can be changed by the argument
 "resolution" (in degrees). If type = "user", a layer to intersect the points and create
 the matrix should be supplied (a Spatial DataFrame object). It uses functions of the
- package raster and maptools. If pres.abs = F the returned matrix will have "x" instead
+ package raster, sf and terra. If pres.abs = F the returned matrix will have "x" instead
 of 0 and 1.
 
 }
@@ -69,7 +69,15 @@ t(map.table$table)
 
 map.table$grid -> grid
 
-data(wrld_simpl)
+### load world map
+library(rnaturalearth)
+library(sf)
+library(sp)
+ne_countries(type="countries", returnclass = "sv") -> wrld_simpl
+st_as_sf(wrld_simpl) -> wrld_simpl
+as_Spatial(wrld_simpl) -> wrld_simpl
+
+### plot
 plot(grid, border="white")
 plot(wrld_simpl, add=TRUE)
 plot(grid, add=TRUE)

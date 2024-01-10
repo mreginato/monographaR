@@ -8,7 +8,7 @@ install.packages("devtools")
 
 library(devtools)
 
-install_github("mreginato/monographaR")
+install_github("mreginato/monographaR", dependencies=T)
 
 ## Help
 

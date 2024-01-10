@@ -1,0 +1,13 @@
+Package: monographaR
+Version: 1.3.0
+Date: 2024-01-10
+Title: Taxonomic Monographs Tools
+Author: Marcelo Reginato
+Maintainer: Marcelo Reginato <reginatobio@yahoo.com.br>
+Depends: R (>= 3.5.0)
+Suggests: knitr
+Imports: circular, png, raster, rmarkdown, rnaturalearth, rpart, sf, sp, terra
+Description: Contains functions intended to facilitate the production of plant taxonomic monographs. The package includes functions to convert tables into taxonomic descriptions, lists of collectors, examined specimens, dichotomous keys, and can generate a monograph skeleton. Additionally, wrapper functions to batch the production of phenology charts and distributional and diversity maps are also available. 
+VignetteBuilder: knitr
+License: GPL (>= 2)
+

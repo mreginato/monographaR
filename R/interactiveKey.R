@@ -1,22 +1,28 @@
 interactiveKey <-
-function(dat=NULL, txt.labels=NULL, poly.sep="/", state.sep=" = ", taxa.in.italics=TRUE, theme = "lumen") {
+function(dat=NULL, txt.labels=NULL, poly.sep="/", taxa.in.italics=TRUE, theme = "lumen", about.first=FALSE) {
   if (is.null(txt.labels)) {
     interactiveKeyLabels() -> txt.labels
   }
   keyCode = NULL
+  state.sep=" = "
   data("keyCode", package = "monographaR", envir = environment())
   keyCode -> int.key.code
   int.key.code$server -> server.code
-  int.key.code$ui -> ui.code
+  if (about.first) {
+    int.key.code$ui_abf -> ui.code
+  } else {
+    int.key.code$ui -> ui.code
+  }
   int.key.code$about -> about.code
   
   ### Split characters
   as.matrix(dat[,-c(1:2)]) -> dat.n
   matrix(ncol=ncol(dat), nrow=0) -> dat.f
   colnames(dat.f) <- colnames(dat)
-  data.frame(dat.f) -> dat.f
+  data.frame(dat.f) -> dat.f -> dat.f.m
   for (i in 1:nrow(dat.n)) {
     dat.n[i,] -> d0
+    d0[is.na(d0)] <- ""
     strsplit(d0, split=poly.sep) -> c0
     unique(unlist(c0)) -> states0
     matrix(nrow=length(states0), ncol=ncol(dat)) -> d1
@@ -32,7 +38,19 @@ function(dat=NULL, txt.labels=NULL, poly.sep="/", state.sep=" = ", taxa.in.itali
       match(c1, states0) -> row0
       d1[row0,col0] <- 1
     }
+    ### check missing & treat as polymorphic
+    d1 -> d2
+    d2[,3:ncol(d2)] <- "ok"
+    colSums(d1[,-c(1,2)]) -> csums
+    which(csums == 0) -> miss
+    if (length(miss) > 0) {
+      miss+2 -> miss
+      d1[,miss] <- 1
+      d2[,miss] <- NA
+    }
+    ### return
     rbind(dat.f, d1) -> dat.f
+    rbind(dat.f.m, d2) -> dat.f.m
   }
   ### Generate Data files
   ### Chars
@@ -48,7 +66,9 @@ function(dat=NULL, txt.labels=NULL, poly.sep="/", state.sep=" = ", taxa.in.itali
   ### Matrix
   
   data.frame(ID=dat.chars$ID, dat.f[,-c(1:2)]) -> mat
+  data.frame(ID=dat.chars$ID, dat.f.m[,-c(1:2)]) -> mat.m
   write.csv(mat, file="Dat_matrix.csv", row.names = F)
+  write.csv(mat.m, file="Dat_matrix_missing.csv", row.names = F)
 
   ### Generate app.R
   
@@ -86,6 +106,8 @@ function(dat=NULL, txt.labels=NULL, poly.sep="/", state.sep=" = ", taxa.in.itali
   cat("\nui.comp.title = ", "'", txt.labels[16,1], "'", sep="", file=file, append=T)
   cat("\nui.comp.help = ", "'", txt.labels[17,1], "'", sep="", file=file, append=T)
   cat("\nui.comp.dropdown = ", "'", txt.labels[18,1], "'", sep="", file=file, append=T)
+  cat("\nui.title.panel4 = ", "'", txt.labels[19,1], "'", sep="", file=file, append=T)
+  cat("\nui.title.dicho = ", "'", txt.labels[20,1], "'", sep="", file=file, append=T)
   cat("\n ", sep="", fill=T, file=file, append=T)
   cat(ui.code, sep="\n", file=file, append=T)
   

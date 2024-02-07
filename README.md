@@ -7,7 +7,7 @@ This repository might have a beta version of the package. The stable version can
 *Run the following code:*
 
 if (!require("devtools", quietly = TRUE)) {install.packages("devtools")}   
-install_github("mreginato/monographaR", dependencies=T)
+install_github("mreginato/monographaR", dependencies=T, build_vignettes=T)
 
 ## Help
 

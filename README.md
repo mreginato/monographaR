@@ -17,6 +17,9 @@ install_github("mreginato/monographaR", dependencies=T)
 
 [Tutorial - português](https://github.com/mreginato/Mini-curso_monographaR)  
 
+[dichoKey.app (demo)](http://htmlpreview.github.io/?https://github.com/mreginato/monographaR-demos/blob/main/dichoKey_app.html)
+
+[interactiveKey (demo)](http://htmlpreview.github.io/?https://github.com/mreginato/monographaR-demos/blob/main/interactiveKey.html)
 
 ## Citation
 

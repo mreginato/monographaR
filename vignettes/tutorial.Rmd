@@ -1,8 +1,6 @@
 ---
 title: "A quick guide to monographaR"
 author: "Marcelo Reginato"
-#date: "September 1, 2015"
-#output: rmarkdown::pdf_document
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{A quick guide to monographaR}

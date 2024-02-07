@@ -3,12 +3,12 @@ title: "monographaR: identification keys"
 author: "Marcelo Reginato"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Identification keys}
+  %\VignetteIndexEntry{monographaR: identification keys}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-In this tutorial we are going over basic steps to build two types of identification keys using monographaR: dichotomous keys (dichoKey) and a interactive key (interactiveKey).
+In this tutorial we are going over basic steps to build two types of identification keys using monographaR: dichotomous keys (dichoKey and dichoKey.app) and an interactive key (interactiveKey).
 
 
 ## Preliminaries
@@ -107,8 +107,8 @@ dichoKey(dat.p) -> key
 __________________________________________________________
 
 ```{r, echo=FALSE, message=FALSE}
-
 dichoKey(dat.p) -> key
+cat(key$key, sep="\n")
 
 ```
 
@@ -162,6 +162,22 @@ cat(key.c$key, file="Pleiochiton_key_costs.txt")
 ```
 
 
+## dichoKey.app
+
+This function is a shiny app that runs the function "dichoKey" in the background. It allows the user to easily subset the data (taxa and characters), as well as change the cost values of the characters. To open the App just type:
+
+```{r, eval=FALSE}
+dichoKey.app()
+```
+
+Then you can select a csv file (formmated similarly to "monographaR_examples$dichoKey"). *Here is a demo video showing how to use the function:*
+
+<center>
+
+[![](png/Image5.png){width=40%, align="center"}](http://htmlpreview.github.io/?https://github.com/mreginato/monographaR-demos/blob/main/dichoKey_app.html)
+
+</center>
+
 ## interactiveKey
 
 
@@ -209,6 +225,12 @@ interactiveKeyLabels(taxon = "species", language = "english") -> spp.eng.labs
 
 ### It would be possible to export the object "spp.eng.labs" (e.g., with write.csv), change the labels accordingly and import it again to use in the next step
 
+### Let's change the "title" (default is "My taxon")
+
+head(spp.eng.labs)
+spp.eng.labs[3] <- "Pleiochiton"
+head(spp.eng.labs)
+
 ```
 
 
@@ -219,8 +241,7 @@ This is done with the following command:
 
 ```{r, tidy=TRUE, message=FALSE, eval=FALSE}
 
-interactiveKey(dat = dat, txt.labels = spp.eng.labs, poly.sep = "/", 
-state.sep = " = ", taxa.in.italics = TRUE, theme = "lumen")
+interactiveKey(dat = dat, txt.labels = spp.eng.labs, poly.sep = "/", taxa.in.italics = TRUE, theme = "lumen")
 
 ```
 
@@ -230,6 +251,7 @@ If everything went smoothly, this command will generate in your working director
 * app.R
 * Dat_characters.csv
 * Dat_matrix.csv
+* Dat_matrix_missing.csv
 * server.R
 * ui.R
 
@@ -246,6 +268,7 @@ The app:
 ![](png/Image2.png){width=100%}
 
 ![](png/Image3.png){width=100%}
+![](png/Image6.png){width=100%}
 
 *See other "theme" options in [shinythemes](https://rstudio.github.io/shinythemes/).*
 
@@ -254,6 +277,14 @@ The app:
 The file "about.Rmd" should be edited (include there whatever you feel deserves to be there). Editing can be done in a simple text editor or in Rstudio. To edit it in Rstudio, go to "File" \Rightarrow  "Open file" e select the file. After finishing editing, you can check how it will be compiled. Just click in "Knit".
 
 ![](png/Image4.png){width=100%}
+
+### Demo
+
+*Here is a demo video showing how to use the function:*
+
+<center>
+[![](png/Image7.png){width=40%, align="center"}](http://htmlpreview.github.io/?https://github.com/mreginato/monographaR-demos/blob/main/interactiveKey.html)
+</center>
 
 ### Example
 

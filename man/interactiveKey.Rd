@@ -8,7 +8,7 @@ Generates code to build an interactive key (shiny app)
 }
 \usage{
 interactiveKey(dat = NULL, txt.labels = NULL, poly.sep = "/", 
-state.sep = " = ", taxa.in.italics = TRUE, theme = "lumen")
+taxa.in.italics = TRUE, theme = "lumen", about.first = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -21,14 +21,14 @@ data.frame
   \item{poly.sep}{
 character
 }
-  \item{state.sep}{
-character
-}
   \item{taxa.in.italics}{
 logical
 }
   \item{theme}{
 character 
+}
+  \item{about.first}{
+logical, whether the tab "about" is the first or the last 
 }
 }
 \details{
@@ -41,10 +41,9 @@ It generates 6 files (app.R, server.R, ui.R, about.Rmd, Dat_characters.csv, and 
 Marcelo Reginato
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
 \seealso{
 \code{\link[monographaR:interactiveKeyLabels]{interactiveKeyLabels}}
+\code{\link[shinythemes:shinythemes]{themes}}
 }
 \examples{
 

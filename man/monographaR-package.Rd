@@ -17,8 +17,8 @@ distributional and diversity maps are also available.
 \tabular{ll}{
 Package: \tab monographaR\cr
 Type: \tab Package\cr
-Version: \tab 1.3.0\cr
-Date: \tab 2024-01-10\cr
+Version: \tab 1.3.1\cr
+Date: \tab 2024-02-01\cr
 License: \tab GPL (>= 2)\cr
 }
 }

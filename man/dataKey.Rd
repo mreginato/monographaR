@@ -4,7 +4,8 @@
 Prepares a data.frame suitable for buildKey
 }
 \description{
-This function takes a data.frame with polymorphic characters and prepares 
+This function takes a data.frame with polymorphic and/or 
+missing data (NA) characters and prepares 
 it to use in the function buildKey.
 }
 \usage{

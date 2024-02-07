@@ -7,7 +7,7 @@ Dichotomous key
 This function generates a dichotomous key
 }
 \usage{
-dichoKey(dat, cost = NULL, clean.characters = T, cp = 0.01)
+dichoKey(dat, cost = NULL, clean.characters = TRUE, cp = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

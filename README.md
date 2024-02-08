@@ -4,7 +4,6 @@ This repository might have a beta version of the package. The stable version can
 
 **********
 ## Installation
-**********
 
 *Run the following code:*
 
@@ -13,7 +12,6 @@ install_github("mreginato/monographaR", dependencies=T, build_vignettes=T)
 
 **********
 ## Help
-**********
 
 [Manual](https://cran.r-project.org/web/packages/monographaR/monographaR.pdf)  
 
@@ -29,7 +27,6 @@ install_github("mreginato/monographaR", dependencies=T, build_vignettes=T)
 
 **********
 ## Citation
-**********
 
 [Reginato, M. (2016) monographaR: an R package to facilitate the production of plant taxonomic monographs. Brittonia 68(2): 212-216](https://link.springer.com/article/10.1007/s12228-015-9407-z)
 

@@ -7,7 +7,7 @@ Maintainer: Marcelo Reginato <reginatobio@yahoo.com.br>
 Depends: R (>= 4.0.0)
 Suggests: knitr
 Imports: circular, png, raster, rmarkdown, rnaturalearth, rpart, sf, shiny, shinydashboard, shinythemes, shinyWidgets, sp, terra
-Description: Contains functions intended to facilitate the production of plant taxonomic monographs. The package includes functions to convert tables into taxonomic descriptions, lists of collectors, examined specimens, and can generate a monograph skeleton. Additionally, wrapper functions to batch the production of phenology charts and distributional and diversity maps are also available. 
+Description: Contains functions intended to facilitate the production of plant taxonomic monographs. The package includes functions to convert tables into taxonomic descriptions, lists of collectors, examined specimens, identification keys (dichotomous and interactive), and can generate a monograph skeleton. Additionally, wrapper functions to batch the production of phenology histograms and distributional and diversity maps are also available.
 VignetteBuilder: knitr
 License: GPL (>= 2)
 RoxygenNote: 7.3.1

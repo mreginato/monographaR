@@ -1,9 +1,9 @@
 ---
-title: "monographaR: identification keys"
+title: "Identification keys"
 author: "Marcelo Reginato"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{monographaR: identification keys}
+  %\VignetteIndexEntry{Identification keys}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -181,7 +181,7 @@ Then you can select a csv file (formmated similarly to "monographaR_examples$dic
 ## interactiveKey
 
 
-This function will generate all the necessary files to build a "shiny app" that includes the interactive key. This "app" can be executed locally (see bellow) or online. To deploy online your app see details in [shiny](https://docs.rstudio.com/shinyapps.io/).
+This function will generate all the necessary files to build a "shiny app" that includes the interactive key. This "app" can be executed locally (see bellow) or online. To deploy online your app see details in [shiny](https://docs.posit.co/shinyapps.io/).
 
 ### Input
 
@@ -270,7 +270,7 @@ The app:
 ![](png/Image3.png){width=100%}
 ![](png/Image6.png){width=100%}
 
-*See other "theme" options in [shinythemes](https://rstudio.github.io/shinythemes/).*
+*See other "theme" options in [shinythemes](https://shiny.posit.co/r/gallery/application-layout/shiny-theme-selector/).*
 
 ### About
 

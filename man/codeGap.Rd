@@ -46,15 +46,42 @@ data.frame(x,x=x+2) -> x2
 
 codeGap(x, n=3, max.states = 5) -> code1
 code1$dat
-#plot(code1$dist)
+
+### check the distribution
+
+na.omit(unique(code1$dat$state)) -> b
+cols <- sort(rep(rainbow(length(b)),2))
+as.numeric(unlist(strsplit(b, "-"))) -> b
+plot(code1$dist)
+abline(v=b, lty="dashed", col=cols, lwd=2)
+
+### estimate "n"
 
 codeGap(x, n=NULL, max.states = NULL) -> code1
 code1$dat
-#plot(code1$dist)
+plot(code1$dist)
+
+### check the distribution
+
+na.omit(unique(code1$dat$state)) -> b
+cols <- sort(rep(rainbow(length(b)),2))
+as.numeric(unlist(strsplit(b, "-"))) -> b
+plot(code1$dist)
+abline(v=b, lty="dashed", col=cols, lwd=2)
+
+### ranges
 
 codeGap(x2, n=NULL, max.states =3 , gap.size=2) -> code1
 code1$dat
 unique(code1$dat$state)
+
+### check the distribution
+
+na.omit(unique(code1$dat$state)) -> b
+cols <- sort(rep(rainbow(length(b)),2))
+as.numeric(unlist(strsplit(b, "-"))) -> b
+plot(code1$dist)
+abline(v=b, lty="dashed", col=cols, lwd=2)
 
 
 }

@@ -7,9 +7,10 @@
 monographaR contains functions intended to facilitate the production
 of plant taxonomic monographs. The package includes functions to convert 
 tables into taxonomic descriptions, lists of collectors, examined specimens, 
-dichotomous keys, and can generate a monograph skeleton. Additionally, 
-wrapper functions to batch the production of phenology histograms and 
-distributional and diversity maps are also available. 
+identificatio keys (dichotomous and interactive), and can generate a 
+monograph skeleton. Additionally, wrapper functions to batch the 
+production of phenology histograms and distributional and diversity 
+maps are also available. 
 }
 
 

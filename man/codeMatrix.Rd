@@ -1,7 +1,7 @@
 \name{codeMatrix}
 \alias{codeMatrix}
 \title{
-code character matrix
+Code character matrix
 }
 \description{
 This is a wrapper function to {\link[monographaR:codeGap]{codeGap}}, which accepts a data.frame of characters values including ranges (1-10).
@@ -15,16 +15,16 @@ codeMatrix(dat, n = NULL, max.states = NULL, poly.sep = "/", gap.size = NULL)
 data.frame
 }
   \item{n}{
-integer, see code{\link[monographaR:codeGap]{codeGap}}
+integer, see \code{\link[monographaR:codeGap]{codeGap}}
 }
   \item{max.states}{
-integer, see code{\link[monographaR:codeGap]{codeGap}}
+integer, see \code{\link[monographaR:codeGap]{codeGap}}
 }
   \item{poly.sep}{
-character, see code{\link[monographaR:codeGap]{codeGap}}
+character, see \code{\link[monographaR:codeGap]{codeGap}}
 }
   \item{gap.size}{
-integer, see code{\link[monographaR:codeGap]{codeGap}}
+integer, see \code{\link[monographaR:codeGap]{codeGap}}
 }
 }
 \value{

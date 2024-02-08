@@ -15,6 +15,8 @@ install_github("mreginato/monographaR", dependencies=T, build_vignettes=T)
 
 [Tutorial - A quick guide to monographaR](https://cran.r-project.org/web/packages/monographaR/vignettes/tutorial.html)  
 
+[Tutorial - Identification Keys](https://cran.r-project.org/web/packages/monographaR/vignettes/keys.html)  
+
 [Mini-curso (português)](https://github.com/mreginato/Mini-curso_monographaR)  
 
 [Demo - dichoKey.app (video)](http://htmlpreview.github.io/?https://github.com/mreginato/monographaR-demos/blob/main/dichoKey_app.html)
